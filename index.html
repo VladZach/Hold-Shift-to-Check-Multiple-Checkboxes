@@ -65,7 +65,12 @@
       firstCheckboxPos = checkboxesArr.indexOf(this)
     }
     let thisPos = checkboxesArr.indexOf(this)
-    let gap = checkboxesArr.slice(firstCheckboxPos, thisPos + 1)
+    
+    let gap = thisPos > firstCheckboxPos ?
+    checkboxesArr.slice(firstCheckboxPos, thisPos + 1) 
+    :
+    checkboxesArr.slice(thisPos + 1, firstCheckboxPos) 
+
     gap.forEach(element => {
       element.checked = true
     });
