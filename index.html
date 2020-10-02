@@ -50,41 +50,29 @@
     </div>
   </div>
 <script>
-  const checkboxes = document.querySelectorAll('input[type="checkbox"]')
-  const checkboxesArr = [...checkboxes]
+  const checkboxes = [...document.querySelectorAll('input[type="checkbox"]')]
 
-  let isShift = false
   let firstCheckboxPos = null
 
   function checkCheck (e) {
-    if (!isShift) {
-      firstCheckboxPos = checkboxesArr.indexOf(this)
+    if (!e.shiftKey) {
+      firstCheckboxPos = checkboxes.indexOf(this)
       return
     }
     if (firstCheckboxPos == null) {
-      firstCheckboxPos = checkboxesArr.indexOf(this)
+      firstCheckboxPos = checkboxes.indexOf(this)
     }
-    let thisPos = checkboxesArr.indexOf(this)
-    
+    let thisPos = checkboxes.indexOf(this)
+
     let gap = thisPos > firstCheckboxPos ?
-    checkboxesArr.slice(firstCheckboxPos, thisPos + 1) 
+    checkboxes.slice(firstCheckboxPos, thisPos + 1) 
     :
-    checkboxesArr.slice(thisPos + 1, firstCheckboxPos) 
+    checkboxes.slice(thisPos + 1, firstCheckboxPos) 
 
     gap.forEach(element => {
       element.checked = true
     });
   }
-
-  document.addEventListener('keydown', (e) => {
-    if (e.keyCode != 16) return
-    isShift = true
-  })
-
-  document.addEventListener('keyup', (e) => {
-    if (e.keyCode != 16) return
-    isShift = false
-  })
 
   checkboxes.forEach(element => {
     element.addEventListener('click', checkCheck)
